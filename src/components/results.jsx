@@ -14,7 +14,7 @@
     return (<div>
         <h2>Quiz Completed</h2>
         Your score: {score}/{questionBank.length}
-        <button className="restart-button"onClick{restartQuiz}>Retake Quiz</button>
+        <button className="restart-button" onClick={restartQuiz}>Retake Quiz</button>
     </div>
     )
 }

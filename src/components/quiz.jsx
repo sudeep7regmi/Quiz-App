@@ -18,19 +18,19 @@ function Quiz() {
       answer: "Kathmandu",
     },
     {
-      quetion: "What is the largest Ocean?",
+      question: "What is the largest Ocean?",
       options: ["Artic", "Pacific", "Atlantic", "Indian"],
-      answer: "Paris",
+      answer: "Pacific",
     },
   ];
 
   const initialAnswers = [null, null, null];
 
   const [userAnswers, setUserAnswers] = useState(initialAnswers);
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
-  const selectedAnswer = userAnswers[currentQuestion]
+
+  const selectedAnswer = userAnswers[currentQuestion];
   function handleSelectOption(option) {
     const newUserAnswers = [...userAnswers];
     newUserAnswers[currentQuestion] = option;
@@ -38,46 +38,51 @@ function Quiz() {
     setUserAnswers(newUserAnswers);
   }
   function gotoNext() {
-    if (currentQuestion === questionBank.length - 1){
-        setIsQuizFinished(true);
-    }else{
-    setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestion === questionBank.length - 1) {
+      setIsQuizFinished(true);
+    } else {
+      setCurrentQuestion(currentQuestion + 1);
+    }
   }
-}
   function gotoPrev() {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
     }
   }
-  function restartQuiz(){
-    
-}
-  if(isQuizFinished){
-    return <Results userAnswers={userAnswers} questionBank={questionBank}
-    restartQuiz={restartQuiz}/>;
+  function restartQuiz() {
+    setUserAnswers(initialAnswers);
+    setCurrentQuestion(0);
+    setIsQuizFinished(false);
   }
-    
-    
+  if (isQuizFinished) {
+    return (
+      <Results
+        userAnswers={userAnswers}
+        questionBank={questionBank}
+        restartQuiz={restartQuiz}
+      />
+    );
+  }
+
   return (
     <div>
-      <h2>Question {currentQuestion +1}</h2>
+      <h2>Question {currentQuestion + 1}</h2>
       <p className="question">{questionBank[currentQuestion].question}</p>
       {questionBank[currentQuestion].options.map((option) => (
-        <button clasName={"option" + (selectedAnswer === option ? "selected":"")}
-        onClick={() => handleSelectOption(option)}>
-    
+        <button
+          className={"option" + (selectedAnswer === option ? "selected" : "")}
+          onClick={() => handleSelectOption(option)}
+        >
           {option}
-          
         </button>
       ))}
       <div className="nav-buttons">
         <button onClick={gotoPrev} disabled={currentQuestion === 0}>
           Previous
         </button>
-        <button onClick={gotoNext} disabled ={!selectedAnswer}>
-            {currentQuestion === questionBank.length - 1 ? "Submit" : "Next"}  
-    
-            </button>
+        <button onClick={gotoNext} disabled={!selectedAnswer}>
+          {currentQuestion === questionBank.length - 1 ? "Submit" : "Next"}
+        </button>
       </div>
     </div>
   );
