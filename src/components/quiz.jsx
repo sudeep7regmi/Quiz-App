@@ -22,6 +22,12 @@ function Quiz() {
       options: ["Artic", "Pacific", "Atlantic", "Indian"],
       answer: "Pacific",
     },
+    {
+    
+      question: "Who is the light of asia?",
+      options: ["Son", "Mao", "Buddha", "Trump"],
+      answer: "Buddha",
+    }
   ];
 
   const initialAnswers = [null, null, null];
